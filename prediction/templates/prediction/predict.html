@@ -1,39 +1,51 @@
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <title>Document</title>
     <style>
-        .radio-margin{
-            margin-left: 200px;
-        }
+      .radio-margin {
+        margin-left: 20px;
+      }
+      .top-margin {
+        margin-top: 20px;
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="row" >
-            <div class="col-sm-6" style="background-color:ghostwhite;">
-                <form action="" method="POST" >
-                    {% csrf_token %}
-                    {{form|crispy}}
-                    <input type="submit" value="submit">
-                </form>
+  </head>
+  <body>
+    <div class="container top-margin">
+      <h1 class="text-center">Predict Vehicle Insurance</h1>
+      <div class="row">
+        <div class="col-sm-6 " >
+          <form class="mx-5 " action="" method="post" novalidate>
+            {% csrf_token %}
+
+            {% for fm in form %}
+            <div class="form-group">
+                {{fm.label_tag}} {{fm}}  <small class="text-warning">{{fm.errors|striptags}}</small>
+                
             </div>
-            <div class="col-sm-6">
-                <h1>Check if someone will ever do vehicle insurance:</h1>
-            </div>
+            {% endfor %}
+            <input class="btn btn-primary" type="submit" value="Predict" />
+          </form>
         </div>
-        
+
+        <div class="col-sm-6">
+          <h1>Check if someone will ever do vehicle insurance:{{prediction}}</h1>
+        </div>
+      </div>
     </div>
-    
-</body>
+  </body>
 </html>
